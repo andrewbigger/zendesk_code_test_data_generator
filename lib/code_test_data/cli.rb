@@ -24,22 +24,19 @@ module CodeTestData
     method_option(
       :orgs,
       type: :numeric,
-      desc: 'Number of organizations to create',
-      default: 20
+      desc: 'Number of organizations to create'
     )
 
     method_option(
       :users,
       type: :numeric,
-      desc: 'Number of users to create',
-      default: 200
+      desc: 'Number of users to create'
     )
 
     method_option(
       :tickets,
       type: :numeric,
-      desc: 'Number of tickets to create',
-      default: 1000
+      desc: 'Number of tickets to create'
     )
 
     def generate

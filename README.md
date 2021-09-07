@@ -35,7 +35,7 @@ And you should be good to go!
 Once installed in your system you can call the `zendesk_code_test_data` executable. Usage instructions can be viewed by passing the `-h` or `--help` flags to the exe:
 
 ```bash
-zendesk_code_test_data -h
+bundle exec ./bin/zendesk_code_test_data -h
 ```
 
 ### Generating data
@@ -43,14 +43,14 @@ zendesk_code_test_data -h
 To generate data, call the generate command. You will be prompted for the necessary inputs.
 
 ```bash
-zendesk_code_test_data generate
+bundle exec ./bin/zendesk_code_test_data generate
 ```
 
 Flags can be used to control the generation thus:
 
 ```bash
 # To create json files on the desktop, with 20 organisations, 200 users and 1000 tickets:
-zendesk_code_test_data generate --location /Users/abigger/Desktop --orgs 20 --users 200 --tickets 1000
+bundle exec ./bin/zendesk_code_test_data generate --location /Users/abigger/Desktop --orgs 20 --users 200 --tickets 1000
 ```
 
 ### Mangling data
@@ -58,5 +58,5 @@ zendesk_code_test_data generate --location /Users/abigger/Desktop --orgs 20 --us
 Beyond the creation of test data, the gem is also capable of mangling test data by removing keys at random, or changing the value of keys. This can help test the defensiveness of a submission by ensuring the input is unexpected.
 
 ```bash
-zendesk_code_test_data mangle -l /Users/abigger/Desktop/users.json --distortion 50 
+bundle exec ./bin/zendesk_code_test_data mangle -l /Users/abigger/Desktop/users.json --distortion 50 
 ```

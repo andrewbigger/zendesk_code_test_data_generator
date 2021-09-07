@@ -26,12 +26,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'json', '2.2.0'
   spec.add_dependency 'logger', '~> 1.4'
   spec.add_dependency 'rack', '2.0.7'
+  spec.add_dependency 'thor'
   
   spec.add_development_dependency 'bump', '~> 0.6'
   spec.add_development_dependency 'byebug', '~> 11.0'
   spec.add_development_dependency 'private_gem', '~> 1.1'
   spec.add_development_dependency 'pry', '~> 0.11'
-  spec.add_development_dependency 'puma', '~> 4.3'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.7', '>= 3.7.0'
   spec.add_development_dependency 'rubocop', '~> 0.58'

@@ -20,7 +20,7 @@ module CodeTestData
           {
             'organizations.json' => orgs,
             'users.json' => users,
-            'tickets' => tickets
+            'tickets.json' => tickets
           }
         )
       end

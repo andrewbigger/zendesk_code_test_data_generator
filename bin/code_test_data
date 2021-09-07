@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.join(__dir__ , '..', 'lib'))
+
+require 'code_test_data/cli'
+
+Signal.trap('INT') do
+  warn("\n#{caller.join("\n")}: interrupted")
+  exit(1)
+end
+
+begin
+  CodeTestData::CLI.start
+rescue StandardError => e
+  puts "ERROR: #{e.message}"
+  puts e.backtrace.join("\n")
+  exit 1
+end

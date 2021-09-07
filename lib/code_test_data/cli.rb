@@ -1,74 +1,70 @@
-require_relative 'generator'
-require_relative 'mangler'
+require 'thor'
+require 'code_test_data/commands'
 
 module CodeTestData
-  # Command line interface helpers and actions
-  module CLI
-    # CLI Actions
-    module Commands
-      def self.generate(args)
-        @cli = HighLine.new
+  # Command Line Interface
+  class CLI < Thor
+    package_name 'Code Test Data'
 
-        @output_location = args.shift || @cli.ask(
-          'please specify output file location'
-        )
-        raise 'you must provide an output file location' unless @output_location
+    desc 'version', 'Print version'
 
-        @org_count = args.shift || @cli.ask(
-          'please specify organisation count'
-        ).to_i
-        raise 'you must provide an organisation count' unless @org_count
-
-        @user_count = args.shift || @cli.ask(
-          'please specify user count'
-        ).to_i
-        raise 'you must provide an user count' unless @user_count
-
-        @ticket_count = args.shift || @cli.ask(
-          'please specify ticket count'
-        ).to_i
-        raise 'you must provide an ticket count' unless @ticket_count
-
-        CodeTestData::Generator.generate(
-          @output_location,
-          @org_count,
-          @user_count,
-          @ticket_count
-        )
-      end
-
-      def self.mangle(args)
-        @cli = HighLine.new
-
-        @input_location = args.shift || @cli.ask(
-          'please specify an input file'
-        )
-        raise 'you must provide an input file location' unless @input_location
-
-        @distortion = args[3] || @cli.ask(
-          'Please specify a distortion value (default: 5)'
-        ).to_i
-
-        CodeTestData::Mangler.mangle(@input_location, @distortion)
-      end
+    def version
+      cmd = CodeTestData::Commands::Version.new(options)
+      cmd.run
     end
 
-    # CLI Helpers
-    class <<self
-      ##
-      # Prints command line message to CLI
-      #
-      def print_message(message)
-        puts(message)
-      end
+    desc 'generate', 'Generate code test data'
 
-      ##
-      # Prints a message and then exits with given status code
-      #
-      def print_message_and_exit(message, exit_code = 1)
-        print_message(message)
-        exit(exit_code)
-      end
+    method_option(
+      :out,
+      type: :string,
+      desc: 'Path to write data files'
+    )
+
+    method_option(
+      :orgs,
+      type: :numeric,
+      desc: 'Number of organizations to create',
+      default: 20
+    )
+
+    method_option(
+      :users,
+      type: :numeric,
+      desc: 'Number of users to create',
+      default: 200
+    )
+
+    method_option(
+      :tickets,
+      type: :numeric,
+      desc: 'Number of tickets to create',
+      default: 1000
+    )
+
+    def generate
+      cmd = CodeTestData::Commands::Generate.new(options)
+      cmd.run
+    end
+
+    desc 'mangle', 'Distort code test data'
+
+    method_option(
+      :in,
+      type: :string,
+      desc: 'Path of file to distort',
+    )
+
+    method_option(
+      :distortion,
+      type: :numeric,
+      desc: 'Amount of distortion to apply',
+      default: 5
+    )
+
+    def mangle
+      cmd = CodeTestData::Commands::Mangle.new(options)
+      cmd.run
     end
   end
 end

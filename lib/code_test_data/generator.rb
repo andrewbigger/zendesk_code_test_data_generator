@@ -1,15 +1,16 @@
-require 'highline'
-
-require_relative 'models'
+require 'code_test_data/models'
 
 module CodeTestData
   # Code Test data generators
   module Generator
     class <<self
-      include CodeTestData::Models
-
       ##
-      # generate files for search code test
+      # Generates files for search code test
+      #
+      # @param [String] output_location
+      # @param [Integer] org_count
+      # @param [Integer] user_count
+      # @param [Integer] ticket_count
       #
       def generate(output_location, org_count, user_count, ticket_count)
         orgs = generate_organisations(org_count)
@@ -28,42 +29,57 @@ module CodeTestData
       private
 
       ##
-      # generate_organisations builds a number of organisations
+      # Builds a number of organisations
+      #
+      # @param [Integer] count
+      #
+      # @return [Array]
       #
       def generate_organisations(count)
         raise 'unknown org count' unless count > 1
 
-        (1..count).map do |org_num|
-          generate_org(org_num)
+        (1..count).map do |org_id|
+          CodeTestData::Models::Organization.make(org_id)
         end
       end
 
       ##
-      # generate_users builds a number of users
+      # Builds a number of users
+      #
+      # @param [Integer] count
+      # @param [Array] orgs
+      # 
+      # @return [Array]
       #
       def generate_users(count, orgs)
         raise 'unknown user count' unless count > 1
 
-        (1..count).map do |user_num|
-          user_org = orgs.sample
-          generate_user(user_num, user_org)
+        (1..count).map do |user_id|
+          CodeTestData::Models::User.make(user_id, orgs.sample)
         end
       end
 
       ##
-      # generate_tickets builds a number of tickets
+      # Builds a number of tickets
+      #
+      # @param [Integer] count
+      # @param [Array] users
+      #
+      # @return [Array]
       #
       def generate_tickets(count, users)
         raise 'unknown ticket count' unless count > 1
 
-        (1..count).map do
-          ticket_user = users.sample
-          generate_ticket(ticket_user)
+        (1..count).map do |ticket_id|
+          CodeTestData::Models::Ticket.make(ticket_id, users.sample)
         end
       end
 
       ##
-      # write_data writes json files from given models
+      # Writes json files from given models
+      #
+      # @param [String] output_location
+      # @param [Hash] data
       #
       def write_data(output_location, data: {})
         unless Dir.exist?(output_location)
@@ -74,7 +90,6 @@ module CodeTestData
           write_path = File.join(output_location, file_name)
           File.open(write_path, 'w') { |f| f.write(test_data.to_json) }
         end
-
       end
     end
   end

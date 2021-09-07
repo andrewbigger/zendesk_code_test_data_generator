@@ -6,11 +6,12 @@ PATH
       aws-sdk-s3 (= 1.42)
       date (~> 3.0)
       faker (~> 2.8)
-      highline (~> 2.0)
+      hashie
       json (= 2.2.0)
       logger (~> 1.4)
       rack (= 2.0.7)
       thor
+      tty-prompt
 
 GEM
   remote: https://rubygems.org/
@@ -64,7 +65,7 @@ GEM
       path_expander (~> 1.0)
       ruby_parser (~> 3.1, > 3.1.0)
       sexp_processor (~> 4.8)
-    highline (2.0.3)
+    hashie (4.1.0)
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -78,6 +79,8 @@ GEM
     parallel (1.19.1)
     parser (2.5.3.0)
       ast (~> 2.4.0)
+    pastel (0.8.0)
+      tty-color (~> 0.5)
     path_expander (1.1.0)
     powerpack (0.1.2)
     private_gem (1.1.4)
@@ -136,6 +139,16 @@ GEM
     simplecov-html (0.10.2)
     thor (0.20.3)
     thread_safe (0.3.6)
+    tty-color (0.6.0)
+    tty-cursor (0.7.1)
+    tty-prompt (0.23.1)
+      pastel (~> 0.8)
+      tty-reader (~> 0.8)
+    tty-reader (0.9.0)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.8)
+      wisper (~> 2.0)
+    tty-screen (0.8.1)
     tty-which (0.3.0)
     unicode-display_width (1.6.0)
     virtus (1.0.5)
@@ -143,6 +156,7 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
+    wisper (2.0.1)
     yard (0.9.20)
 
 PLATFORMS
@@ -162,4 +176,4 @@ DEPENDENCIES
   yard (~> 0.9)
 
 BUNDLED WITH
-   2.2.14
+   2.2.25

@@ -22,11 +22,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws-sdk-s3', '1.42'
   spec.add_dependency 'date', '~> 3.0'
   spec.add_dependency 'faker', '~> 2.8'
-  spec.add_dependency 'highline', '~> 2.0'
+  spec.add_dependency 'hashie'
   spec.add_dependency 'json', '2.2.0'
   spec.add_dependency 'logger', '~> 1.4'
   spec.add_dependency 'rack', '2.0.7'
   spec.add_dependency 'thor'
+  spec.add_dependency 'tty-prompt'
   
   spec.add_development_dependency 'bump', '~> 0.6'
   spec.add_development_dependency 'byebug', '~> 11.0'

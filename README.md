@@ -15,7 +15,7 @@ Further, the gem is able to mangle json replacing types and deleting keys at ran
 First clone this repo and bundle install:
 
 ```bash
-git clone git@github.com:andrewbigger/zendesk_code_test_data_generator
+git clone git@github.com:andrewbigger/code_test_data_generator
 
 bundle install
 ```
@@ -32,10 +32,10 @@ And you should be good to go!
 
 ## Usage
 
-Once installed in your system you can call the `zendesk_code_test_data` executable. Usage instructions can be viewed by passing the `-h` or `--help` flags to the exe:
+Once installed in your system you can call the `code_test_data` executable. Usage instructions can be viewed by passing the `-h` or `--help` flags to the exe:
 
 ```bash
-bundle exec ./bin/zendesk_code_test_data -h
+bundle exec ./bin/code_test_data -h
 ```
 
 ### Generating data
@@ -43,20 +43,20 @@ bundle exec ./bin/zendesk_code_test_data -h
 To generate data, call the generate command. You will be prompted for the necessary inputs.
 
 ```bash
-bundle exec ./bin/zendesk_code_test_data generate
+bundle exec ./bin/code_test_data generate
 ```
 
 Flags can be used to control the generation thus:
 
 ```bash
 # To create json files on the desktop, with 20 organisations, 200 users and 1000 tickets:
-bundle exec ./bin/zendesk_code_test_data generate --location /Users/abigger/Desktop --orgs 20 --users 200 --tickets 1000
+bundle exec ./bin/code_test_data generate --out /Users/abigger/Desktop --orgs 20 --users 200 --tickets 1000
 ```
 
 ### Mangling data
 
-Beyond the creation of test data, the gem is also capable of mangling test data by removing keys at random, or changing the value of keys. This can help test the defensiveness of a submission by ensuring the input is unexpected.
+Beyond the creation of test data, the gem is also capable of mangling test data by removing keys at random, and/or changing the value of keys. This can help test the defensiveness of a submission by ensuring the input is unexpected.
 
 ```bash
-bundle exec ./bin/zendesk_code_test_data mangle -l /Users/abigger/Desktop/users.json --distortion 50 
+bundle exec ./bin/code_test_data mangle --in /Users/abigger/Desktop/users.json --distortion 50
 ```

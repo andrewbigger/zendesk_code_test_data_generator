@@ -13,8 +13,8 @@ module CodeTestData
       String => -> { Faker::Lorem.word },
       Integer => -> { Faker::Number.number(digits: 2) },
       Array => -> { [Faker::Number.number(digits: 2), Faker::Lorem.word] },
-      TrueClass => true,
-      FalseClass => false
+      TrueClass => -> { true },
+      FalseClass => -> { false }
     }.freeze
 
     class <<self
@@ -117,15 +117,23 @@ module CodeTestData
       ##
       # Writes json data to disk
       #
-      # @param [String] output_location
+      # @param [String] input_file
       # @param [Hash] data
       #
-      def write_data(output_location, data)
-        unless File.exist?(output_location)
+      def write_data(input_file, data)
+        unless File.exist?(input_file)
           raise 'output location does not exist or is not a file'
         end
 
-        File.open(output_location+"_mangled", 'w') { |f| f.write(data.to_json) }
+        output_dir = File.dirname(input_file)
+        output_filename = File.basename(input_file, '.json')
+
+        output_location = File.join(
+          output_dir,
+          "#{output_filename}.mangled.json"
+        )
+
+        File.open(output_location, 'w') { |f| f.write(data.to_json) }
       end
     end
   end

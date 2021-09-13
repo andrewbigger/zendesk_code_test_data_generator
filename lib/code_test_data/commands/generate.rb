@@ -39,9 +39,9 @@ module CodeTestData
 
         CodeTestData::Generator.generate(
           output_location,
-          org_count,
-          user_count,
-          ticket_count
+          org_count.to_i,
+          user_count.to_i,
+          ticket_count.to_i
         )
       end
     end
